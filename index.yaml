@@ -1,0 +1,60 @@
+name: ibm-cluster-login
+type: terraform
+alias: cluster
+description: Module to log into an existing IBM Cloud cluster (IKS or OpenShift)
+interfaces:
+  - github.com/cloud-native-toolkit/automation-modules#cluster
+tags:
+  - cluster
+  - ibm
+  - login
+versions:
+  - platforms: []
+    providers:
+      - name: ibm
+        source: ibm-cloud/ibm
+    dependencies: []
+    variables:
+      - name: resource_group_name
+        type: string
+        description: >-
+          The name of the IBM Cloud resource group where the cluster will be
+          created/can be found.
+      - name: region
+        type: string
+        description: The region where the cluster has been provisioned
+      - name: name
+        type: string
+        description: >-
+          The name of the cluster. If not provided the name will be derived from
+          the name_prefix and/or resource_group_name
+        default: ''
+      - name: name_prefix
+        type: string
+        description: >-
+          The prefix name for the service. If not provided it will default to
+          the resource group name
+        default: ''
+      - name: disable_public_endpoint
+        type: bool
+        description: Flag indicating that private endpoints should be used
+        default: false
+    version: v0.1.0
+    outputs:
+      - name: id
+        description: ID of the cluster.
+      - name: name
+        description: Name of the cluster.
+      - name: resource_group_name
+        description: Name of the resource group containing the cluster.
+      - name: region
+        description: Region containing the cluster.
+      - name: config_file_path
+        description: Path to the config file for the cluster.
+      - name: platform
+        type:
+          lines:
+            - local.cluster_type
+        sensitive: true
+        description: Configuration values for the cluster platform
+id: github.com/cloud-native-toolkit/terraform-ibm-cluster-login
