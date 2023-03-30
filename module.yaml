@@ -1,14 +1,18 @@
-name: ""
+name: ibm-cluster-login
 type: terraform
-description: ""
+alias: cluster
+description: Module to log into an existing IBM Cloud cluster (IKS or OpenShift)
+interfaces:
+  - github.com/cloud-native-toolkit/automation-modules#cluster
 tags:
-    - tools
-    - devops
+    - cluster
+    - ibm
+    - login
 versions:
 - platforms: []
-#  providers:
-#    - name: ibm
-#      source: "ibm-cloud/ibm"
+  providers:
+    - name: ibm
+      source: "ibm-cloud/ibm"
   dependencies: []
 #    - id: cluster
 #      refs:
