@@ -17,6 +17,7 @@ jobs:
       matrix:
         testcase:
           - iks_latest
+          - ocp4_latest
       fail-fast: false
 
     # Steps represent a sequence of tasks that will be executed as part of the job
