@@ -53,16 +53,3 @@ data ibm_container_cluster_config cluster_admin {
   resource_group_id = data.ibm_resource_group.resource_group.id
   config_dir        = data.external.dirs.result.cluster_config_dir
 }
-
-resource null_resource wait_for_iam_sync {
-  depends_on = [data.ibm_container_cluster_config.cluster_admin]
-
-  provisioner "local-exec" {
-    command = "${path.module}/scripts/wait-for-iam-sync.sh"
-
-    environment = {
-      BIN_DIR = data.clis_check.clis.bin_dir
-      KUBECONFIG = local.cluster_config
-    }
-  }
-}

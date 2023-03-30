@@ -11,19 +11,19 @@ output "name" {
 output "resource_group_name" {
   value       = var.resource_group_name
   description = "Name of the resource group containing the cluster."
-  depends_on  = [null_resource.wait_for_iam_sync]
+  depends_on  = [data.ibm_container_cluster_config.cluster_admin]
 }
 
 output "region" {
   value       = var.region
   description = "Region containing the cluster."
-  depends_on  = [null_resource.wait_for_iam_sync]
+  depends_on  = [data.ibm_container_cluster_config.cluster_admin]
 }
 
 output "config_file_path" {
   value       = local.cluster_config
   description = "Path to the config file for the cluster."
-  depends_on  = [null_resource.wait_for_iam_sync]
+  depends_on  = [data.ibm_container_cluster_config.cluster_admin]
 }
 
 output "platform" {
@@ -39,5 +39,5 @@ output "platform" {
   }
   sensitive = true
   description = "Configuration values for the cluster platform"
-  depends_on  = [null_resource.wait_for_iam_sync]
+  depends_on  = [data.ibm_container_cluster_config.cluster_admin]
 }
