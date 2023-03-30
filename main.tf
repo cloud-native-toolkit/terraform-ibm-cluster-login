@@ -11,9 +11,9 @@ locals {
   kube_version      = lookup(data.ibm_container_vpc_cluster.config, "kube_version", "")
   cluster_type      = length(regexall(".*_openshift", local.kube_version)) > 0 ? "openshift" : "kubernetes"
   # value should be ocp4, ocp3, or kubernetes
-  cluster_type_code = "ocp4"
-  cluster_type_tag  = "ocp"
-  cluster_version   = "${var.ocp_version}_openshift"
+  cluster_type_code = local.cluster_type == "openshift" ? "ocp4" : "iks"
+  cluster_type_tag  = local.cluster_type == "openshift" ? "ocp" : "iks"
+  cluster_version   = regex("([0-9]+[.][0-9]+[.][0-9]+).*", local.kube_version)[0]
 }
 
 resource null_resource print_resources {
